@@ -1,10 +1,15 @@
 package com.exo1.exo1.controller;
 
 import com.exo1.exo1.dto.ProjetDto;
+import com.exo1.exo1.dto.TaskDto;
 import com.exo1.exo1.dto.UserDto;
+import com.exo1.exo1.mapper.UserMapper;
+import com.exo1.exo1.repository.UserRepository;
 import com.exo1.exo1.service.ProjetService;
 import com.exo1.exo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +20,10 @@ import java.util.List;
 public class ProjetController {
     @Autowired
     private ProjetService projetService;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
     public ResponseEntity<List<ProjetDto>> findAll()
@@ -42,5 +51,8 @@ public class ProjetController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         projetService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    public List<UserDto> findAll(Pageable pageable) {
+        return userMapper.toDtos(userRepository.findAll(pageable).getContent());
     }
 }

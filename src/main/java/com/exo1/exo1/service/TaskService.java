@@ -1,10 +1,12 @@
 package com.exo1.exo1.service;
 
 import com.exo1.exo1.dto.TaskDto;
+import com.exo1.exo1.dto.UserDto;
 import com.exo1.exo1.entity.Task;
 import com.exo1.exo1.mapper.TaskMapper;
 import com.exo1.exo1.repository.TaskRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -34,6 +36,10 @@ public class TaskService {
         taskDto.setId(existingTask.getId());
         return taskMapper.toDto(taskRepository.save(taskMapper.toEntity(taskDto)));
     }
+    public List<TaskDto> findAll(Pageable pageable) {
+        return taskMapper.toDtos(taskRepository.findAll(pageable).getContent());
+    }
+
 
     public void delete(Long id) {
         taskRepository.deleteById(id);

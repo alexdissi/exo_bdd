@@ -1,0 +1,9 @@
+1732028177648|5|statement|select * from information_schema.sequences
+1732028177677|0|statement|select * from "public"."projet" where 1=0
+1732028177682|0|statement|select * from "public"."users" where 1=0
+1732028177691|0|statement|select * from "public"."projet" where 1=0
+1732028177692|0|statement|select * from "public"."users" where 1=0
+1732028193965|6|statement|insert into task (projet_id,status,title,users_id) values (NULL,'string','string',NULL)
+1732028193975|2|commit|
+1732028212678|3|statement|select t1_0.task_id,p1_0.projet_id,p1_0.description,p1_0.name,u1_0.projet_id,u1_1.users_id,u1_1.email,u1_1.name,t2_0.task_id,t2_0.projet_id,t2_0.status,t2_0.title,t1_0.status,t1_0.title,u2_0.users_id,u2_0.email,u2_0.name,p3_0.users_id,p3_1.projet_id,p3_1.description,p3_1.name,t3_0.projet_id,t3_0.task_id,t3_0.status,t3_0.title,t3_0.users_id from task t1_0 left join projet p1_0 on p1_0.projet_id=t1_0.projet_id left join users_projet u1_0 on p1_0.projet_id=u1_0.projet_id left join users u1_1 on u1_1.users_id=u1_0.users_id left join task t2_0 on u1_1.users_id=t2_0.users_id left join users u2_0 on u2_0.users_id=t1_0.users_id left join users_projet p3_0 on u2_0.users_id=p3_0.users_id left join projet p3_1 on p3_1.projet_id=p3_0.projet_id left join task t3_0 on p3_1.projet_id=t3_0.projet_id where t1_0.task_id=1
+1732028212681|0|commit|

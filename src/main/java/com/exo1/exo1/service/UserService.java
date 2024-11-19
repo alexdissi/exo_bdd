@@ -9,7 +9,7 @@ import com.exo1.exo1.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
-
+import org.springframework.data.domain.Pageable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +37,6 @@ public class UserService {
                 });
         return userMapper.toDto(userRepository.save(user));
     }
-
     public UserDto update(Long id, UserDto userDto) {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found with id " + id));
@@ -55,6 +54,10 @@ public class UserService {
             }
         });
         return userMapper.toDto(userRepository.save(userUpdated));
+    }
+
+    public List<UserDto> findAll(Pageable pageable) {
+        return userMapper.toDtos(userRepository.findAll(pageable).getContent());
     }
 
     public void delete(Long id) {

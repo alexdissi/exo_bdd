@@ -1,11 +1,13 @@
 package com.exo1.exo1.service;
 
 import com.exo1.exo1.dto.ProjetDto;
+import com.exo1.exo1.dto.UserDto;
 import com.exo1.exo1.entity.Projet;
 import com.exo1.exo1.mapper.ProjetMapper;
 import com.exo1.exo1.repository.ProjetRepository;
 import com.exo1.exo1.repository.TaskRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -43,6 +45,10 @@ public class ProjetService {
             }
         });
         return projetMapper.toDto(projetRepository.save(projetUpdated));
+    }
+
+    public List<ProjetDto> findAll(Pageable pageable) {
+        return projetMapper.toDtos(projetRepository.findAll(pageable).getContent());
     }
 
     public void delete(Long id) {
